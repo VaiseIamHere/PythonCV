@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QDialog, QFormLayout, QLineEdit, QComb
 from PyQt5.QtCore import Qt
 import manage_data
 
+
 # Assuming you have a person module
 import person
 

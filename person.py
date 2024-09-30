@@ -15,3 +15,4 @@ class Person:
 def getTimeTable(file_location):
     return timetable.get_tt(file_location) + ["0"*20]
 
+

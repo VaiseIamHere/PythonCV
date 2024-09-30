@@ -127,4 +127,5 @@ def top_slots(tt_list):
 
     return indices_to_slots(list_of_indices)
 
+
 # , indices_to_slots(ignoring_ipd)

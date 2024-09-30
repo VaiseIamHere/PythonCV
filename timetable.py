@@ -23,3 +23,4 @@ def get_tt(image_path):
     utils_tt.assign_ipd(tt)
     print(tt)
     return tt
+

@@ -11,6 +11,7 @@ import register
 # Assume `Person` and `Person.person_list` are defined in your `person.py`.
 from person import Person
 
+
 class SharedState:
     selected_persons = []
 
