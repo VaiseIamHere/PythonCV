@@ -4,14 +4,14 @@ import numpy as np
 
 class TableExtractor:
 
-    def __init__(self, image_path, image_name):
+    def __init__(self, image_path):
         self.image_path = image_path
-        self.image_name = image_name
+        # self.image_name = image_name
 
     def execute(self):
         self.read_image()
-        file_name = self.image_name + ".jpg"
-        self.store_process_image(file_name, self.image)
+        # file_name = self.image_name + ".jpg"
+        # self.store_process_image("file_name", self.image)
         self.convert_image_to_grayscale()
         self.threshold_image()
         self.invert_image()
@@ -125,6 +125,6 @@ class TableExtractor:
         rect[3] = pts[np.argmax(diff)]
         return rect
 
-    def store_process_image(self, file_name, image):
-        path = "./image/" + file_name
-        cv2.imwrite(path, image)
+    # def store_process_image(self, file_name, image):
+    #     path = "./image/" + file_name
+    #     cv2.imwrite(path, image)

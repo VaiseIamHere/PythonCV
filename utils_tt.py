@@ -18,7 +18,7 @@ def sort_row(text):
     cmp = text[0][0][0][0]
     current_row = []
     for i in range(0, len(text)):
-        if (cmp - 20) <= text[i][0][0][0] <= (cmp + 20):
+        if (cmp - 20)<= text[i][0][0][0] <= (cmp + 20):
             current_row.append(text[i])
         else:
             cmp = text[i][0][0][0]

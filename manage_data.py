@@ -31,34 +31,30 @@ timeslots = [
 
 
 
-class Person:
-    person_list = []
-
-    def __init__(self, name, timetable, dept, ipd_day, senior, id):
-        self.name = name
-        self.timetable = timetable
-        self.dept = dept
-        self.ipd_day = ipd_day
-        self.senior = senior
-        self.id = id
-        Person.person_list.append(self)
-
-
-def load_data():
-    global n
-    with open('database.json', 'r') as file:
-        data = json.load(file)
-    n = len(data) - 1
-    for i, j in enumerate(data):
-        Person(data[i]['name'], data[i]['timetable'], data[i]['dept'], data[i]['ipd_day'], data[i]['senior'], str(j))
-
-
+# class Person:
+#     person_list = []
+#
+#     def __init__(self, name, timetable, dept, ipd_day, senior, id):
+#         self.name = name
+#         self.timetable = timetable
+#         self.dept = dept
+#         self.ipd_day = ipd_day
+#         self.senior = senior
+#         self.id = id
+#         Person.person_list.append(self)
+# def load_data():
+#     global n
+#     with open('database.json', 'r') as file:
+#         data = json.load(file)
+#     n = len(data) - 1
+#     for i, j in enumerate(data):
+#         Person(data[i]['name'], data[i]['timetable'], data[i]['dept'], data[i]['ipd_day'], data[i]['senior'], str(j))
 def append_to_db(name, dept, img, senior=False):
     global n
     with open('database.json', 'r') as file:
         data = json.load(file)
     n += 1
-    timetable = tt.get_tt(img, name)
+    timetable = tt.get_tt(img)
 
     ipd_day = 0
     for i, j in enumerate(timetable):
@@ -77,7 +73,7 @@ def append_to_db(name, dept, img, senior=False):
 
     with open('database.json', 'w') as file:
         json.dump(data, file, indent=4)
-
+    return timetable
 
 def get_indexes(lst, value):
     indexes = []
@@ -87,10 +83,7 @@ def get_indexes(lst, value):
     return indexes
 
 
-def all_slots(persons):
-    tt_lists = []
-    for obj in persons:
-        tt_lists.append(obj.timetable)
+def all_slots(tt_lists):
     slots = []
     no_of_people = len(tt_lists)
     for day in range(0, 6):
@@ -116,21 +109,22 @@ def indices_to_slots(list_of_indices):
 
 
 # Accepts list of person class objs
-def top_slots(persons):
-    ipd_day = set()
-    for obj in persons:
-        ipd_day.add(obj.ipd_day)
-    slots = all_slots(persons)
+def top_slots(tt_list):
+    # ipd_day = set()
+    # for obj in persons:
+    #     ipd_day.add(obj.ipd_day)
+    slots = all_slots(tt_list)
     top_5 = heapq.nlargest(5, slots)
     list_of_indices = []
     for i in top_5:
         index = get_indexes(slots, i)
         list_of_indices.append(index)
-    ignoring_ipd = list_of_indices
-    for i in list_of_indices:
-        for j in i:
-            if j//20 in ipd_day:
-                i.remove(j)
+    # ignoring_ipd = list_of_indices
+    # for i in list_of_indices:
+    #     for j in i:
+    #         if j//20 in ipd_day:
+    #             i.remove(j)
 
-    return indices_to_slots(list_of_indices), indices_to_slots(ignoring_ipd)
+    return indices_to_slots(list_of_indices)
 
+# , indices_to_slots(ignoring_ipd)
